@@ -3,7 +3,7 @@ import figures.Figure;
 import java.util.ArrayList;
 
 public class Board {
-    private ArrayList<Row> board;
+    private ArrayList<Row> board = new ArrayList<>();
     public Board() {
         char[] UpperCaseAlphabet = {'A','B','C','D','E','F','G','H'};
         for (int i = 0; i < 8; i++) {

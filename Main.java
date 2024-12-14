@@ -5,6 +5,6 @@ public class Main {
         Board board = new Board();
         Rook rook = new Rook('A','1');
         board.addPiece(rook);
-        System.out.println(board.getBoard().toString());
+        System.out.println(board.getBoard());
     }
 }
