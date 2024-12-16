@@ -11,7 +11,7 @@ public class Row {
         return row;
     }
     public void addPiece(Figure figure) {
-        figures[figure.getPosition().get(1)] = figure;
+        figures[figure.getPosition().get(1)] = figure; 
     }
     public Figure getFigure(int position) {
         return figures[position];

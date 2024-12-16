@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Figure {
     private char row;
-    private char col;
-    public Figure(char y, char x) {
+    private int col;
+    public Figure(char y, int x) {
         this.row = y;
         this.col = x;
     }
