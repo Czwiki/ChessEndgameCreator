@@ -26,5 +26,7 @@ public class Board {
     public ArrayList<Row> getBoard() {
         return board;
     }
-
+    public Row getRow(char i){
+        return board.get(i);
+    }
 }
