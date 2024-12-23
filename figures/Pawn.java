@@ -2,7 +2,7 @@ package figures;
 
 public class Pawn extends Figure {
     private static final int value = 1;
-    public Pawn(char x, char y) {
-        super(x, y);
+    public Pawn(char x, char y, boolean team) {
+        super(x, y, team);
     }
 }

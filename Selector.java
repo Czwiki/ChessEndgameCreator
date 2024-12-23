@@ -3,6 +3,7 @@ import figures.*;
 import java.util.ArrayList;
 
 public class Selector {
+    private final OberserverSelector watcher = new OberserverSelector(this);
     public void piece_selector_even(int remaining_points){
         ArrayList<Figure> white = new ArrayList<Figure>();
         ArrayList<Figure> black = new ArrayList<Figure>(); 
@@ -16,6 +17,10 @@ public class Selector {
             
                 default:
                     break;
+            }
+            if (!watcher.statuscheck(white) || !watcher.statuscheck(black)) {
+                
+                throw new Exception("Wrong figures selected. Discarded.");
             }
         }   
     }

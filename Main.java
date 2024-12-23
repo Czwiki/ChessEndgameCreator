@@ -5,6 +5,6 @@ public class Main {
         Board board = new Board();
         Rook rook = new Rook('A','1');
         board.addPiece(rook);
-        System.out.println(board.getBoard().get(0).getFigure(1));
+        System.out.println(board.getBoard().get(0).getFigure('A'));
     }
 }

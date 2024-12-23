@@ -4,51 +4,50 @@ import java.util.Map;
 import figures.Figure;
 
 public class Row {
-    private char row;
+    private int row;
     private Figure[] figures;
     private final int[] white_positions;
     private final int[] black_positions;
     static Map<Character, Integer> map = new HashMap<Character, Integer>();
-    public Row(char row, boolean a) {
+    public Row(int row, boolean a) {
+        char[] UpperCaseAlphabet = {'A','B','C','D','E','F','G','H'};
         this.row = row;
         this.figures = new Figure[8];
         this.white_positions = new int[4];
         this.black_positions = new int[4];
-        map.put('A', 1); // das board braucht int, nicht die Reihe
-        map.put('B', 2);
-        map.put('C', 3);
-        map.put('D', 4);
-        map.put('E', 5);
-        map.put('F', 6);
-        map.put('G', 7);
-        map.put('H', 8);
-        for (int i = 1; i<9; i++){
+        map.put('A', 0);
+        map.put('B', 1);
+        map.put('C', 2);
+        map.put('D', 3);
+        map.put('E', 4);
+        map.put('F', 5);
+        map.put('G', 6);
+        map.put('H', 7);
+        for (int i = 0; i<8; i++){
             int index_w = 0;
             int index_b = 0;
             if (a) {
-                white_positions[index_w] = i;
+                white_positions[index_w] = UpperCaseAlphabet[i];
                 a = !a;
                 index_w++;
             }
             else {
-                black_positions[index_b] = i;
+                black_positions[index_b] = UpperCaseAlphabet[i];
                 a = !a;
                 index_b++;
             }
         }
     }
 
-    public char getRowIndex() {
+    public int getRowIndex() {
         return row;
     }
-    public int getRowIndexint() {
-        return map.get(getRowIndex());
-    }
+
     public void addPiece(Figure figure) {
-        figures[figure.getPosition().get(1) - '0'] = figure; 
+        figures[figure.getPosition().get(0) - '0'] = figure; 
     }
-    public Figure getFigure(int position) {
-        return figures[position];
+    public Figure getFigure(char position) {
+        return figures[map.get(position)];
     }
     public Figure[] getFigures() {
         return figures;
