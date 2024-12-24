@@ -7,7 +7,13 @@ public class Bishop extends Figure {
         super(x, y, team);
         startcolor = color;
     }
+    public Bishop(boolean t){
+        super(t);
+    }
     public boolean getstartcolor(){
         return startcolor;
+    }
+    public int getValue(){
+        return value;
     }
 }

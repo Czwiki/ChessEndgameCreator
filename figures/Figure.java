@@ -11,6 +11,9 @@ public class Figure {
         this.row = y;
         this.team = t;
     }
+    public Figure(boolean t){
+        this.team = t;
+    }
     public ArrayList<Character> getPosition() {
         ArrayList<Character> a = new ArrayList<Character>();
         a.add(this.col);
@@ -20,4 +23,9 @@ public class Figure {
     public boolean getTeam(){
         return this.team;
     }
+    public void setPosition (ArrayList<Character> position){
+        this.col = position.get(0);
+        this.row = position.get(1);
+    }
+    public int getValue(){return 0;};
 }

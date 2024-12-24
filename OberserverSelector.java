@@ -1,12 +1,5 @@
 import java.util.ArrayList;
-import java.util.Queue;
-
-import figures.Bishop;
-import figures.Figure;
-import figures.Knight;
-import figures.Pawn;
-import figures.Queen;
-import figures.Rook;
+import figures.*;
 
 public class OberserverSelector {
     Selector observedobject;

@@ -5,4 +5,10 @@ public class Knight extends Figure {
     public Knight(char x, char y, boolean team) {
         super(x, y, team);
     }
+    public Knight(boolean t){
+        super(t);
+    }
+    public int getValue(){
+        return value;
+    }
 }

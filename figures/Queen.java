@@ -5,4 +5,10 @@ public class Queen extends Figure {
     public Queen(char x, char y, boolean team) {
         super(x, y, team);
     }
+    public Queen(boolean t){
+        super(t);
+    }
+    public int getValue(){
+        return value;
+    }
 }

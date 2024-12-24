@@ -5,4 +5,10 @@ public class King extends Figure {
     public King(char x, char y, boolean team) {
         super(x, y, team);
     }
+    public King(boolean t){
+        super(t);
+    }
+    public int getValue(){
+        return value;
+    }
 }
