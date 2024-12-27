@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Selector {
     private final OberserverSelector watcher = new OberserverSelector(this);
-    public void piece_selector_even(int remaining_points){
+    public ArrayList<ArrayList<Figure>> piece_selector_even(int remaining_points) {
         ArrayList<Figure> white = new ArrayList<Figure>();
         ArrayList<Figure> black = new ArrayList<Figure>(); 
         SecureRandom rand = new SecureRandom();
@@ -24,7 +24,7 @@ public class Selector {
                 for (int i = 0; i <2; i++){
                     white.add(new Pawn(true));
                     black.add(new Pawn(false));
-                    remaining_points = remaining_points - black.get(black.size()-1).getValue();
+                    remaining_points = remaining_points - black.get(black.size()-1).getValue(); // Punkte abziehen funktioniert nicht
                 }
                 break;
             }
@@ -53,10 +53,18 @@ public class Selector {
                 default:
                     break;
             }
-            if (!watcher.statuscheck(white) || !watcher.statuscheck(black)) {
-                
-                throw new Exception("Wrong figures selected. Discarded.");
-            }
-        }   
+            if (!watcher.statuscheck(white)) { // Überprüfung der enthaltenen Figuren
+                remaining_points = remaining_points + white.get(white.size()-1).getValue();
+                white.remove(white.size()-1);
+                black.remove(white.size()-1);
+            } // zurücksetzen der vorgenommenen Änderungen
+        }
+        white.add(new King(true));
+        black.add(new King(false));
+        ArrayList<ArrayList<Figure>> a = new ArrayList<ArrayList<Figure>>();
+        a.add(white);
+        a.add(black);
+
+        return a;
     }
 }
