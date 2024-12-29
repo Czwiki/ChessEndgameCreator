@@ -1,4 +1,6 @@
+package Selectors;
 import java.util.ArrayList;
+
 import figures.*;
 
 public class OberserverSelector {
