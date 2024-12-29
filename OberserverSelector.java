@@ -51,12 +51,24 @@ public class OberserverSelector {
         return number;
     }
     public int numberofbishops(ArrayList<Figure> figures) {
-        int number = 0;
+        int number_white = 0;
+        int number_black = 0;
         for (int i = 0;i<figures.size();i++){
             if (figures.get(i) instanceof Bishop){
-                number++;
+                if (figures.get(i).getstartcolor() == true) {
+                    number_white++;
+                }
+                else {
+                    number_black++;
+                }
             }
         }
-        return number;
+        if (number_black <= 1 && number_white <= 1){
+            return number_black + number_white;
+        }
+        else{
+            return 3;// automatisch false
+        }
+
     }
 }

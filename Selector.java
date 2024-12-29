@@ -13,13 +13,13 @@ public class Selector {
             if (remaining_points > 9) {
                 value = rand.nextInt(4);
             }
-            else if (remaining_points < 9) {
+            if (remaining_points < 9 && remaining_points >= 5) {
                 value = rand.nextInt(3);
             }
-            else if (remaining_points < 5) {
+            if (remaining_points < 5 && remaining_points >= 3) {
                 value = rand.nextInt(2);
             }
-            else if (remaining_points < 3) {
+            if (remaining_points < 3) {
                 value = 0;
                 for (int i = 0; i <2; i++){
                     white.add(new Pawn(true));
@@ -28,43 +28,80 @@ public class Selector {
                 }
                 break;
             }
+            Figure a = new Figure(true); // initialisieren der Variablen, durch den Switch und die Grenzen ist sichergestellt, dass diese immer aktualisiert werden
+            Figure b = new Figure(false);
             switch (value) {
                 case 0:
-                    white.add(new Pawn(true));
-                    black.add(new Pawn(false));
-                    remaining_points = remaining_points - black.get(black.size()-1).getValue();
+                    a = new Pawn(true);
+                    b = new Pawn(false);
+                    white.add(a);
+                    black.add(b);
+                    if (!watcher.statuscheck(white)) { // Überprüfung der enthaltenen Figuren
+                        white.remove(white.indexOf(a));
+                        black.remove(black.indexOf(b));
+                        break;
+                    } // zurücksetzen der vorgenommenen Änderungen
+                    remaining_points = remaining_points - a.getValue();
                     break;
                 case 1:
-                    white.add(new Knight(true));
-                    black.add(new Knight(false));
-                    remaining_points = remaining_points - black.get(black.size()-1).getValue();
+                    a = new Knight(true);
+                    b = new Knight(false);
+                    white.add(a);
+                    black.add(b);
+                    if (!watcher.statuscheck(white)) { // Überprüfung der enthaltenen Figuren
+                        white.remove(white.indexOf(a));
+                        black.remove(black.indexOf(b));
+                        break;
+                    } // zurücksetzen der vorgenommenen Änderungen
+                    remaining_points = remaining_points - a.getValue();
+                    break;
                 case 2:
-                    white.add(new Bishop(true));
-                    black.add(new Bishop(false));
-                    remaining_points = remaining_points - black.get(black.size()-1).getValue();
+                    boolean f = rand.nextBoolean();
+                    a = new Bishop(true, f);
+                    b = new Bishop(false, f);
+                    white.add(a);
+                    black.add(b);
+                    if (!watcher.statuscheck(white)) { // Überprüfung der enthaltenen Figuren
+                        white.remove(white.indexOf(a));
+                        black.remove(black.indexOf(b));
+                        break;
+                    } // zurücksetzen der vorgenommenen Änderungen
+                    remaining_points = remaining_points - a.getValue();
+                    break;
                 case 3:
-                    white.add(new Rook(true));
-                    black.add(new Rook(false));
-                    remaining_points = remaining_points - black.get(black.size()-1).getValue();
+                    a = new Rook(true);
+                    b = new Rook(false);
+                    white.add(a);
+                    black.add(b);
+                    if (!watcher.statuscheck(white)) { // Überprüfung der enthaltenen Figuren
+                        white.remove(white.indexOf(a));
+                        black.remove(black.indexOf(b));
+                        break;
+                    } // zurücksetzen der vorgenommenen Änderungen
+                    remaining_points = remaining_points - a.getValue();
+                    break;
                 case 4:
-                    white.add(new Queen(true));
-                    black.add(new Queen(false));
-                    remaining_points = remaining_points - black.get(black.size()-1).getValue();
+                    a = new Queen(true);
+                    b = new Queen(false);
+                    white.add(a);
+                    black.add(b);
+                    if (!watcher.statuscheck(white)) { // Überprüfung der enthaltenen Figuren
+                        white.remove(white.indexOf(a));
+                        black.remove(black.indexOf(b));
+                        break;
+                    } // zurücksetzen der vorgenommenen Änderungen
+                    remaining_points = remaining_points - a.getValue();
+                    break;
                 default:
                     break;
             }
-            if (!watcher.statuscheck(white)) { // Überprüfung der enthaltenen Figuren
-                remaining_points = remaining_points + white.get(white.size()-1).getValue();
-                white.remove(white.size()-1);
-                black.remove(white.size()-1);
-            } // zurücksetzen der vorgenommenen Änderungen
         }
         white.add(new King(true));
         black.add(new King(false));
-        ArrayList<ArrayList<Figure>> a = new ArrayList<ArrayList<Figure>>();
-        a.add(white);
-        a.add(black);
+        ArrayList<ArrayList<Figure>> c = new ArrayList<ArrayList<Figure>>();
+        c.add(white);
+        c.add(black);
 
-        return a;
+        return c;
     }
 }

@@ -27,5 +27,6 @@ public class Figure {
         this.col = position.get(0);
         this.row = position.get(1);
     }
-    public int getValue(){return 0;};
+    public int getValue(){return 0;}
+    public boolean getstartcolor(){return true;}
 }
