@@ -11,7 +11,6 @@ public class Main {
         ArrayList<Figure> figures_black = figures.get(1);
         for (int i = 0; i < figures_white.size(); i++){
             System.out.println(figures_white.get(i));
-            System.out.println(figures_black.get(i));
         }
     }
 }

@@ -10,24 +10,26 @@ public class Selector {
         SecureRandom rand = new SecureRandom();
         while (remaining_points >0) {
             int value = 0;
-            if (remaining_points > 9) {
-                value = rand.nextInt(4);
+            if (remaining_points >= 9) {
+                value = rand.nextInt(5); // 0-4
             }
             if (remaining_points < 9 && remaining_points >= 5) {
-                value = rand.nextInt(3);
+                value = rand.nextInt(4); // 0-3
             }
             if (remaining_points < 5 && remaining_points >= 3) {
-                value = rand.nextInt(2);
+                value = rand.nextInt(3); // 0-2
             }
-            if (remaining_points < 3) {
-                value = 0;
-                for (int i = 0; i <2; i++){
-                    white.add(new Pawn(true));
-                    black.add(new Pawn(false));
-                    remaining_points = remaining_points - black.get(black.size()-1).getValue(); // Punkte abziehen funktioniert nicht
+            if (remaining_points < 3) { // Auffüllen mit Pawns, keine anderen Figuren möglich
+                for (int i = 0; remaining_points>0; i++){
+                    Pawn a = new Pawn(true);
+                    Pawn b = new Pawn(false);
+                    white.add(a);
+                    black.add(b);
+                    remaining_points = remaining_points - a.getValue();
                 }
                 break;
             }
+
             Figure a = new Figure(true); // initialisieren der Variablen, durch den Switch und die Grenzen ist sichergestellt, dass diese immer aktualisiert werden
             Figure b = new Figure(false);
             switch (value) {

@@ -27,6 +27,6 @@ public class Figure {
         this.col = position.get(0);
         this.row = position.get(1);
     }
-    public int getValue(){return 0;}
-    public boolean getstartcolor(){return true;}
+    public int getValue(){return 0;} // Dummy-Funktionen, wird von allen Figuren überschrieben
+    public boolean getstartcolor(){return true;} // Dummy-Funktionen, wird von Bishop überschrieben
 }
