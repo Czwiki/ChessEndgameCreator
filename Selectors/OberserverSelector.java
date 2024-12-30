@@ -71,6 +71,17 @@ public class OberserverSelector {
         else{
             return 3;// automatisch false
         }
+    }
 
+    public boolean given_figures_check (ArrayList<Figure> given_figures, int remaining_points) {
+        int given_points = 0;
+        for (int i = 0; i < given_figures.size();i++){
+            given_points += given_figures.get(i).getValue();
+        }
+        if (remaining_points+given_points> 39) {
+            System.out.println("Wrong combination of given arguments, too many points in given figures and remaining points.");
+            return false;
+        }
+        return true;
     }
 }

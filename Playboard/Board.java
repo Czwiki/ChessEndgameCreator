@@ -1,3 +1,4 @@
+package Playboard;
 import figures.Figure;
 
 import java.util.ArrayList;

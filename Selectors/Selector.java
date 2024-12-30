@@ -1,6 +1,5 @@
 package Selectors;
 import java.security.SecureRandom;
-import java.io.*;
 
 import figures.*;
 import java.util.ArrayList;
@@ -99,20 +98,157 @@ public class Selector {
         }
         figures.add(new King(true));
         if (t){
-            white = figures;
+            for (int i = 0; i < figures.size();i++) {
+                white.add(figures.get(i));
+            }
         }
         else {
-            black = figures;
+            for (int i = 0; i < figures.size();i++) {
+                black.add(figures.get(i));
+            }
         }
     }
-    public void piece_selector_uneven (int white_remaining_points, int black_remaining_points) {
+
+    public void piece_selector_uneven_points (int white_remaining_points, int black_remaining_points) { // unterschiedliche Punkte, unterschiedliche Figuren
         clear_figures();
         this.piece_selector(white_remaining_points, true);
         this.piece_selector(black_remaining_points, false);
     }
-    public void piece_selector_even (int remaining_points){
+
+    public void piece_selector_even_points (int remaining_points){ // gleiche Punktzahl aber unterschiedliche Figuren
         clear_figures();
         this.piece_selector(remaining_points, true);
         this.piece_selector(remaining_points, false);
+    }
+
+    public void piece_selector_even_points_identical (int remaining_points) { // identische Figuren werden gewünscht
+        clear_figures();
+        this.piece_selector(remaining_points, true);
+        this.copy_given_figures(white, false);
+    }
+
+    public void piece_selector_even_points_same_given_figures(ArrayList<Figure> given_figures, int remaining_points_exclusive, boolean t) {
+        clear_figures();
+        if (!watcher.given_figures_check(given_figures, remaining_points_exclusive)){
+            return;
+        }
+
+        if (t) {
+            this.copy_given_figures(given_figures, t);
+            this.piece_selector(remaining_points_exclusive, t);
+        }
+        else {
+            this.copy_given_figures(given_figures, !t);
+            this.piece_selector(remaining_points_exclusive, !t);
+        }
+    }
+
+    public void piece_selector_even_points_same_given_figures_identical(ArrayList<Figure> given_figures, int remaining_points_exclusive) {
+        clear_figures();
+        if (!watcher.given_figures_check(given_figures, remaining_points_exclusive)){
+            return;
+        }
+        // weiß wählt und wird nach schwarz kopiert
+        this.copy_given_figures(given_figures, true);
+        this.piece_selector(remaining_points_exclusive, true);
+        this.copy_given_figures(white, false);
+    }
+
+    public void piece_selector_even_points_same_given_figures (ArrayList<Figure> given_figures, int remaining_points_exclusive) {
+        clear_figures();
+        if (!watcher.given_figures_check(given_figures, remaining_points_exclusive)){
+            return;
+        }
+        this.copy_given_figures(given_figures, true);
+        this.piece_selector(remaining_points_exclusive, true);
+        
+        this.copy_given_figures(given_figures, false);
+        this.piece_selector(remaining_points_exclusive,false); 
+
+    }
+
+    public void piece_selector_uneven_points_same_given_figures (ArrayList<Figure> given_figures, int remaining_points_exclusive_white, int remaining_points_exclusive_black){
+        clear_figures();
+        if (!watcher.given_figures_check(given_figures, remaining_points_exclusive_white) || !watcher.given_figures_check(given_figures, remaining_points_exclusive_black)){
+            return;
+        }
+        // kopieren und jede Farbe für sich wird ausgewählt
+        this.copy_given_figures(given_figures, true);
+        this.piece_selector(remaining_points_exclusive_white, true);
+        
+        this.copy_given_figures(given_figures, false);
+        this.piece_selector(remaining_points_exclusive_black,false); 
+    }
+
+    public void piece_selector_uneven_points_uneven_given_figures (ArrayList<Figure> given_figures_white, ArrayList<Figure> given_figures_black, int remaining_points_exclusive_white, int remaining_points_exclusive_black) {
+        clear_figures();
+        if (!watcher.given_figures_check(given_figures_white, remaining_points_exclusive_white) || !watcher.given_figures_check(given_figures_black, remaining_points_exclusive_black)){
+            return;
+        }
+        // kopieren die gegebenen Figuren für beide Farben und jede Farbe für sich wird ausgewählt
+        this.copy_given_figures(given_figures_white, true);
+        this.piece_selector(remaining_points_exclusive_white, true);
+        
+        this.copy_given_figures(given_figures_black, false);
+        this.piece_selector(remaining_points_exclusive_black,false);
+    }
+
+    public void copy_given_figures (ArrayList<Figure> given_figures, boolean t) { // kopieren der Figuren, aber diese müssen neue Instanzen sein!
+        if (t){
+            for (int i = 0; i < given_figures.size(); i++){ 
+                Figure object = given_figures.get(i);
+                String name = object.getClass().getName();
+                switch (name) {
+                    case "figures.Pawn":
+                        white.add(new Pawn(true));
+                        break;
+                    case "figures.Knight":
+                        white.add(new Knight(true));
+                        break;
+                    case "figures.Bishop":
+                        white.add(new Bishop(true,object.getstartcolor()));
+                        break;
+                    case "figures.Rook":
+                        white.add(new Rook(true));
+                        break;
+                    case "figures.Queen":
+                        white.add(new Queen(true));
+                        break;
+                    case "figures.King":
+                        white.add(new King(false));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < given_figures.size(); i++){ // kopieren der Figuren, aber diese müssen neue Instanzen sein!
+                Figure object = given_figures.get(i);
+                String name = object.getClass().getName();
+                switch (name) {
+                    case "figures.Pawn":
+                        black.add(new Pawn(false));
+                        break;
+                    case "figures.Knight":
+                        black.add(new Knight(false));
+                        break;
+                    case "figures.Bishop":
+                        black.add(new Bishop(false,object.getstartcolor()));
+                        break;
+                    case "figures.Rook":
+                        black.add(new Rook(false));
+                        break;
+                    case "figures.Queen":
+                        black.add(new Queen(false));
+                        break;
+                    case "figures.King":
+                        black.add(new King(false));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }
