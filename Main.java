@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
-import Playboard.Board;
-import Selectors.Selector;
+import Playboard.*;
 import figures.*;
 import Selectors.*;
 
