@@ -44,10 +44,9 @@ public class Selector {
                 }
                 break;
             }
-            Figure a = new Figure(true); // initialisieren der Variablen, durch den Switch und die Grenzen ist sichergestellt, dass diese immer aktualisiert werden
             switch (value) {
                 case 0:
-                    a = new Pawn(true);
+                    Pawn a = new Pawn(true);
                     figures.add(a);
                     if (!watcher.statuscheck(white)) { // Überprüfung der enthaltenen Figuren
                         figures.remove(figures.indexOf(a));
@@ -56,41 +55,41 @@ public class Selector {
                     remaining_points = remaining_points - a.getValue();
                     break;
                 case 1:
-                    a = new Knight(true);
-                    figures.add(a);
+                    Knight b = new Knight(true);
+                    figures.add(b);
                     if (!watcher.statuscheck(figures)) { // Überprüfung der enthaltenen Figuren
-                        figures.remove(figures.indexOf(a));
+                        figures.remove(figures.indexOf(b));
                         break;
                     } // zurücksetzen der vorgenommenen Änderungen
-                    remaining_points = remaining_points - a.getValue();
+                    remaining_points = remaining_points - b.getValue();
                     break;
                 case 2:
                     boolean f = rand.nextBoolean();
-                    a = new Bishop(true, f);
-                    figures.add(a);
+                    Bishop c = new Bishop(true, f);
+                    figures.add(c);
                     if (!watcher.statuscheck(figures)) { // Überprüfung der enthaltenen Figuren
-                        figures.remove(figures.indexOf(a));
+                        figures.remove(figures.indexOf(c));
                         break;
                     } // zurücksetzen der vorgenommenen Änderungen
-                    remaining_points = remaining_points - a.getValue();
+                    remaining_points = remaining_points - c.getValue();
                     break;
                 case 3:
-                    a = new Rook(true);
-                    figures.add(a);
+                    Rook d = new Rook(true);
+                    figures.add(d);
                     if (!watcher.statuscheck(figures)) { // Überprüfung der enthaltenen Figuren
-                        figures.remove(figures.indexOf(a));
+                        figures.remove(figures.indexOf(d));
                         break;
                     } // zurücksetzen der vorgenommenen Änderungen
-                    remaining_points = remaining_points - a.getValue();
+                    remaining_points = remaining_points - d.getValue();
                     break;
                 case 4:
-                    a = new Queen(true);
-                    figures.add(a);
+                    Queen e = new Queen(true);
+                    figures.add(e);
                     if (!watcher.statuscheck(figures)) { // Überprüfung der enthaltenen Figuren
-                        figures.remove(figures.indexOf(a));
+                        figures.remove(figures.indexOf(e));
                         break;
                     } // zurücksetzen der vorgenommenen Änderungen
-                    remaining_points = remaining_points - a.getValue();
+                    remaining_points = remaining_points - e.getValue();
                     break;
                 default:
                     break;
